@@ -29,6 +29,10 @@ app.get('/api/persons', (req, resp) => {
   resp.json(persons)
 })
 
+app.get('/api/info', (req, resp) => {
+  resp.send(`puhelinluettelossa ${persons.length} henkilön tiedot <br /> <br /> ${new Date()}`)
+})
+
 const PORT = 3001
 
 app.listen(PORT, () => {
