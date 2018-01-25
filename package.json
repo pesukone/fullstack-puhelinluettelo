@@ -1,0 +1,14 @@
+{
+  "name": "fullstack-puhelinluettelo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "./node_modules/.bin/nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "nodemon": "^1.14.11"
+  }
+}
