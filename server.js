@@ -50,6 +50,18 @@ app.delete('/api/persons/:id', (req, resp) => {
 })
 
 app.post('/api/persons', (req, resp) => {
+  if (!req.body.name) {
+    return resp.status(400).json({ error: "invalid name" })
+  }
+
+  if (!req.body.number) {
+    return resp.status(400).json({ error: "invalid number" })
+  }
+
+  if (persons.filter(p => p.name === req.body.name)[0]) {
+    return resp.status(400).json({ error: "name must be unique" })
+  }
+
   const id = Math.floor(Math.random() * 9001)
 
   const person = {
@@ -61,7 +73,6 @@ app.post('/api/persons', (req, resp) => {
   persons.concat(person)
   resp.json(person)
 })
-
 
 const PORT = 3001
 
