@@ -72,7 +72,7 @@ app.post('/api/persons', (req, resp) => {
     id: Math.floor(Math.random() * 9001)
   }
 
-  persons.concat(person)
+  persons.push(person)
   resp.json(person)
 })
 
