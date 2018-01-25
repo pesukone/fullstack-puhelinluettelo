@@ -33,6 +33,12 @@ app.get('/api/info', (req, resp) => {
   resp.send(`puhelinluettelossa ${persons.length} henkilön tiedot <br /> <br /> ${new Date()}`)
 })
 
+app.get('/api/persons/:id', (req, resp) => {
+  const id = req.params.id
+
+  persons[id] ? resp.json(persons[id]) : resp.status(404).end()
+})
+
 const PORT = 3001
 
 app.listen(PORT, () => {
