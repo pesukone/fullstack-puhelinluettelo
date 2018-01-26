@@ -1,10 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 
 const app = express()
 app.use(bodyParser.json())
 app.use(morgan(':method :url :data :status :res[content-length] - :response-time ms'))
+app.use(cors())
 
 morgan.token('data', (req, resp) => JSON.stringify(req.body))
 
@@ -31,29 +33,29 @@ let persons = [
   }
 ]
 
-app.get('/api/persons', (req, resp) => {
+app.get('/persons', (req, resp) => {
   resp.json(persons)
 })
 
-app.get('/api/info', (req, resp) => {
+app.get('/info', (req, resp) => {
   resp.send(`puhelinluettelossa ${persons.length} henkilön tiedot <br /> <br /> ${new Date()}`)
 })
 
-app.get('/api/persons/:id', (req, resp) => {
+app.get('/persons/:id', (req, resp) => {
   const id = Number(req.params.id)
   const person = persons.filter(p => p.id === id)[0]
 
   person ? resp.json(person) : resp.status(404).end()
 })
 
-app.delete('/api/persons/:id', (req, resp) => {
+app.delete('/persons/:id', (req, resp) => {
   const id = Number(req.params.id)
 
   persons = persons.filter(p => p.id !== id)
   resp.status(204).end()
 })
 
-app.post('/api/persons', (req, resp) => {
+app.post('/persons', (req, resp) => {
   if (!req.body.name) {
     return resp.status(400).json({ error: "invalid name" })
   }
