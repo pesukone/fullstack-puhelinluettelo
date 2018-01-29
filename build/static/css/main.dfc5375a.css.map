@@ -1,0 +1,1 @@
+{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,cACC,WACA,iBACA,mBACA,kBACA,aACA,kBAAoB","file":"static/css/main.dfc5375a.css","sourcesContent":[".notification {\n\tcolor: black;\n\tbackground: green;\n\tborder-style: solid;\n\tborder-radius: 5px;\n\tpadding: 10px;\n\tmargin-bottom: 10px;\n}\n\n\n\n// WEBPACK FOOTER //\n// ./src/App.css"],"sourceRoot":""}
