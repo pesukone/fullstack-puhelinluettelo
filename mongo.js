@@ -1,6 +1,6 @@
 const goose = require('mongoose')
 
-const url = 'mongodb://fullstack:Konditionaal1@ds119028.mlab.com:19028/fullstack'
+const url = 'mongodb://fullstack:sekred@ds119028.mlab.com:19028/fullstack'
 
 goose.connect(url)
 goose.Promise = global.Promise
