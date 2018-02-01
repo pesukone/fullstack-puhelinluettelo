@@ -75,8 +75,6 @@ app.post('/persons', (req, resp) => {
     return resp.status(400).json({ error: "name must be unique" })
   }
 
-  const id = Math.floor(Math.random() * 9001)
-
   const person = new Person({
     name: req.body.name,
     number: req.body.number
@@ -85,11 +83,8 @@ app.post('/persons', (req, resp) => {
   person
     .save()
     .then(savedPerson => {
-      resp.json(formatPerson(savedPerson))
+      resp.json(Person.format(savedPerson))
     })
-
-  //persons.push(person)
-  //resp.json(person)
 })
 
 const formatPerson = (person) => {
