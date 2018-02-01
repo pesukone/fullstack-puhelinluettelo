@@ -45,14 +45,17 @@ app.get('/persons', (req, resp) => {
 })
 
 app.get('/info', (req, resp) => {
-  resp.send(`puhelinluettelossa ${persons.length} henkilön tiedot <br /> <br /> ${new Date()}`)
+  Person
+    .find({})
+    .then(persons => {
+      resp.send(`puhelinluettelossa ${persons.length} henkilön tiedot <br /> <br /> ${new Date()}`)
+    })
 })
 
 app.get('/persons/:id', (req, resp) => {
-  const id = Number(req.params.id)
-  const person = persons.filter(p => p.id === id)[0]
-
-  person ? resp.json(person) : resp.status(404).end()
+  Person.findById(req.params.id, (err, person) => {
+    person ? resp.json(Person.format(person)) : resp.status(404).end()
+  })
 })
 
 app.delete('/persons/:id', (req, resp) => {
