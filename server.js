@@ -40,7 +40,7 @@ app.get('/persons', (req, resp) => {
   Person
     .find({})
     .then(persons => {
-      resp.json(persons.map(formatPerson))
+      resp.json(persons.map(Person.format))
     })
 })
 
