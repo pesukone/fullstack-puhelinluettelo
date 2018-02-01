@@ -56,10 +56,12 @@ app.get('/persons/:id', (req, resp) => {
 })
 
 app.delete('/persons/:id', (req, resp) => {
-  const id = Number(req.params.id)
-
-  persons = persons.filter(p => p.id !== id)
-  resp.status(204).end()
+  Person.findByIdAndRemove(req.params.id, (err, person) => {
+    if (err) {
+      console.log(err)
+    }
+    resp.status(204).end()
+  })
 })
 
 app.post('/persons', (req, resp) => {
