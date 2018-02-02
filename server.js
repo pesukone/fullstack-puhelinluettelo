@@ -13,33 +13,11 @@ app.use(express.static('build'))
 
 morgan.token('data', (req, resp) => JSON.stringify(req.body))
 
-let persons = [
-  {
-    name: "Arto Hellas",
-    number: "040-123456",
-    id: 1
-  },
-  {
-    name: "Matti Tienari",
-    number: "040-123456",
-    id: 2
-  },
-  {
-    name: "Arto Järvinen",
-    number: "040-123456",
-    id: 3
-  },
-  {
-    name: "Lea Kutvonen",
-    number: "040-123456",
-    id: 4
-  }
-]
-
 app.get('/persons', (req, resp) => {
   Person
     .find({})
     .then(persons => {
+      console.log(persons)
       resp.json(persons.map(Person.format))
     })
 })
