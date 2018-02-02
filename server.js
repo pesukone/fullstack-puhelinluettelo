@@ -17,7 +17,6 @@ app.get('/persons', (req, resp) => {
   Person
     .find({})
     .then(persons => {
-      console.log(persons)
       resp.json(persons.map(Person.format))
     })
 })
