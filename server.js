@@ -67,6 +67,23 @@ app.delete('/persons/:id', (req, resp) => {
   })
 })
 
+app.put('/persons/:id', (req, resp) => {
+  Person.findById(req.params.id, (err, person) => {
+    if (err) {
+      resp.status(500).send(err)
+    }
+
+    person.number = req.params.number || person.number
+    person.save((err, person) => {
+      if (err) {
+        resp.status(500).send(err)
+      } else {
+        resp.json(person)
+      }
+    })
+  })
+})
+
 app.post('/persons', (req, resp) => {
   if (!req.body.name) {
     return resp.status(400).json({ error: "invalid name" })
