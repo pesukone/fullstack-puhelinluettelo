@@ -93,19 +93,23 @@ app.post('/persons', (req, resp) => {
     return resp.status(400).json({ error: "invalid number" })
   }
 
-  if (persons.filter(p => p.name === req.body.name)[0]) {
-    return resp.status(400).json({ error: "name must be unique" })
-  }
+  Person
+    .find({ name: req.body.name })
+    .then(result => {
+      if (!result[0]) {
+        const person = new Person({
+          name: req.body.name,
+          number: req.body.number
+        })
 
-  const person = new Person({
-    name: req.body.name,
-    number: req.body.number
-  })
-
-  person
-    .save()
-    .then(savedPerson => {
-      resp.json(Person.format(savedPerson))
+        person
+          .save()
+          .then(savedPerson => {
+            resp.json(Person.format(savedPerson))
+          })
+      } else {
+        resp.status(400).json({ error: "name must be unique" })
+      }
     })
 })
 
